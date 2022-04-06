@@ -1,5 +1,11 @@
-import React from 'react';
-import {Box, Button, Container, createTheme, CssBaseline, FormControl, Grid, Input, InputLabel, makeStyles, ThemeProvider} from '@material-ui/core'
+import { useState } from 'react';
+import {Button, Container, createTheme, CssBaseline, FormControl, Grid, Input, InputLabel, makeStyles, ThemeProvider, Typography} from '@material-ui/core'
+
+interface User{
+  email: string
+  password: string
+}
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -12,7 +18,14 @@ function App() {
       marginTop: 30
     }
   });
-  const classes = useStyles()
+  const classes = useStyles();
+  const [user, setuser] = useState<User>({email: '', password: ''});
+  const handleChange = (e:any) =>{
+    setuser({
+      ...user,
+      [e.target.name]: e.target.value
+    })
+  }
   return (
       <ThemeProvider theme={theme}>
         <CssBaseline/>
@@ -23,7 +36,7 @@ function App() {
                 <InputLabel htmlFor='my-label'>
                   Email
                 </InputLabel>
-                <Input id='email' />
+                <Input onChange={handleChange} value={user.email} name='email' id='email' />
               </FormControl>
             </Grid>
             <Grid item>
@@ -31,7 +44,7 @@ function App() {
                 <InputLabel htmlFor='label-password'>
                   Password
                 </InputLabel>
-                <Input type='password' id='password' />
+                <Input type='password' onChange={handleChange} name='password' value={user.password} id='password' />
               </FormControl>
             </Grid>
             <Grid item>
@@ -40,6 +53,8 @@ function App() {
               </Button>
             </Grid>
           </Grid>
+          <Typography>{user.email}</Typography>
+          <Typography>{user.password}</Typography>
         </Container>
       </ThemeProvider>
   );
