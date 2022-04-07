@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import {Button, Container, FormControl, Grid, Input, InputLabel, makeStyles, Link, Box} from '@material-ui/core'
+import {Button, Container, FormControl, Grid, Input, InputLabel, makeStyles, Link, Box, TextField} from '@material-ui/core'
 import User from "../../models/User";
 
-const Login: React.FC = ()=>{
+const SignUp: React.FC = ()=>{
  
     const useStyles = makeStyles({
         root: {
@@ -11,7 +11,7 @@ const Login: React.FC = ()=>{
       });
     
       const classes = useStyles();
-      const [user, setuser] = useState<User>({email: '', password: ''});
+      const [user, setuser] = useState<User>({name: '', email: '', password: ''});
       const handleChange = (e:any) =>{
         setuser({
           ...user,
@@ -22,6 +22,10 @@ const Login: React.FC = ()=>{
 
         <Container>
           <Grid container direction='column' justifyContent='center' alignItems='center'>
+            <Grid item>
+                <TextField label="Nome" name="nome" onChange={handleChange} value={user.name}>
+                </TextField>
+            </Grid>
             <Grid item>
               <FormControl>
                 <InputLabel htmlFor='my-label'>
@@ -51,4 +55,4 @@ const Login: React.FC = ()=>{
 
     )
 }
-export default Login
+export default SignUp
